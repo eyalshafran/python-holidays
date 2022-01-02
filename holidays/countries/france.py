@@ -76,6 +76,8 @@ class France(HolidayBase):
             self[date(year, NOV, 11)] = "Armistice 1918"
 
         # Religious holidays
+        self[easter(year) + rd(days=50)] = "Whit Monday"
+
         if self.prov in [
             "Alsace-Moselle",
             "Guadeloupe",

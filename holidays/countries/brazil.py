@@ -14,7 +14,7 @@
 from datetime import date
 
 from dateutil.easter import easter
-from dateutil.relativedelta import relativedelta as rd, TU
+from dateutil.relativedelta import MO, relativedelta as rd, TU, WE
 
 from holidays.constants import (
     JAN,
@@ -74,10 +74,12 @@ class Brazil(HolidayBase):
     def _populate(self, year):
         # New Year's Day
         self[date(year, JAN, 1)] = "Ano novo"
+        self[date(year, JAN, 25)] = "Sao Paulo Anniversary"
 
         self[date(year, APR, 21)] = "Tiradentes"
 
         self[date(year, MAY, 1)] = "Dia Mundial do Trabalho"
+        self[date(year, JUL, 9)] = "State Rebelion Day"
 
         self[date(year, SEP, 7)] = "Independência do Brasil"
 
@@ -99,7 +101,9 @@ class Brazil(HolidayBase):
         quaresma = easter(year) - rd(days=46)
         self[quaresma] = "Quarta-feira de cinzas (Início da Quaresma)"
 
+        self[quaresma - rd(weekday=MO(-1))] = "Carnaval Monday"
         self[quaresma - rd(weekday=TU(-1))] = "Carnaval"
+        self[quaresma - rd(weekday=WE(-1))] = "Carnaval Wednesday"
 
         if self.state == "AC":
             self[date(year, JAN, 23)] = "Dia do evangélico"

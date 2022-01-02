@@ -12,8 +12,8 @@
 #  License: MIT (see LICENSE file)
 
 from datetime import date
-
-from dateutil.relativedelta import relativedelta as rd, MO
+from dateutil.easter import easter
+from dateutil.relativedelta import TH, relativedelta as rd, MO, FR
 
 from holidays.constants import FRI, SAT, SUN
 from holidays.constants import JAN, FEB, MAR, MAY, SEP, NOV, DEC
@@ -55,6 +55,10 @@ class Mexico(HolidayBase):
 
         if year >= 1917:
             self[date(year, MAR, 21)] = name
+
+        # Holy Week
+        self[easter(year) + rd(weekday=TH(-1))] = "Holy Thursday"
+        self[easter(year) + rd(weekday=FR(-1))] = "Good Friday"
 
         # Labor Day
         if year >= 1923:
@@ -100,6 +104,9 @@ class Mexico(HolidayBase):
             self[date(year, DEC, 25) + rd(days=-1)] = name + " (Observed)"
         elif self.observed and date(year, DEC, 25).weekday() == SUN:
             self[date(year, DEC, 25) + rd(days=+1)] = name + " (Observed)"
+
+
+
 
 
 class MX(Mexico):
