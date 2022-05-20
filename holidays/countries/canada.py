@@ -208,6 +208,8 @@ class Canada(HolidayBase):
             self[date(2000, 4, 1)] = "Nunavut Day"
 
         # Civic Holiday
+        self[date(year, AUG, 1) + rd(weekday=MO)] = "Civic Holiday"
+        
         if self.prov in ("ON", "MB", "NT") and year >= 1900:
             self[date(year, AUG, 1) + rd(weekday=MO)] = "Civic Holiday"
         elif self.prov == "AB" and year >= 1974:
