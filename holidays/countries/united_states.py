@@ -521,7 +521,8 @@ class UnitedStates(HolidayBase):
 
         # Thanksgiving
         if year > 1870:
-            self[date(year, NOV, 1) + rd(weekday=TH(+4))] = "Thanksgiving"
+            dt = date(year, NOV, 1) + rd(weekday=TH(+4))
+            self[dt] = "Thanksgiving"
             self[dt - rd(days=+1)] = "Thanksgiving Wednesday"
             self[dt + rd(days=+1)] = "Thanksgiving Friday"
 
